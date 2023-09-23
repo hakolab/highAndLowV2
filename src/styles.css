@@ -1,0 +1,56 @@
+html {
+  background-color: #6f4b3e;
+}
+
+.app {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.h1-header {
+  font-size: 32px;
+  margin-bottom: 0;
+  color: #f8f4e6;
+}
+
+.h2-header {
+  font-size: 24px;
+  margin-top: 0;
+  color: #f8f4e6;
+}
+
+#container {
+  width: 95%;
+  background-color: #2e8b57;
+  margin: 0 auto;
+  border: 5px solid #595857;
+  border-radius: 5px;
+}
+
+#play-area {
+  height: 450px;
+}
+
+#score-board {
+  height: 100px;
+  margin: 0 auto;
+  background-color: burlywood;
+  color: white;
+}
+
+#score-text {
+  line-height: 100px;
+  color: #4B2D1C;
+}
+
+#card-box {
+  margin: 50px 25px;
+}
+
+#message-box {
+  margin: 10px;
+}
+
+#message {
+  color: white;
+}
