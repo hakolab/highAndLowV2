@@ -10,6 +10,7 @@ const START = 'START'
 const NEXT = 'NEXT'
 const HIGH = 'HIGH'
 const LOW = 'LOW'
+const NEXT_GAME = 'NEXT GAME'
 
 export default {
   GAME_TITLE,
@@ -23,5 +24,6 @@ export default {
   START,
   NEXT,
   HIGH,
-  LOW
+  LOW,
+  NEXT_GAME
 }

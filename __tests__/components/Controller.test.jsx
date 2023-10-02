@@ -11,6 +11,7 @@ describe('Controller コンポーネントのテスト', () => {
         startGame={() => {}}
         check={() => {}}
         next={() => {}}
+        nextGame={() => {}}
       />
     )
 
@@ -27,6 +28,7 @@ describe('Controller コンポーネントのテスト', () => {
         startGame={() => {}}
         check={() => {}}
         next={() => {}}
+        nextGame={() => {}}
       />
     )
 
@@ -46,6 +48,7 @@ describe('Controller コンポーネントのテスト', () => {
         startGame={() => {}}
         check={() => {}}
         next={() => {}}
+        nextGame={() => {}}
       />
     )
 
@@ -53,7 +56,7 @@ describe('Controller コンポーネントのテスト', () => {
     expect(nextButton).toBeInTheDocument()
   })
 
-  test('ゲームが終了したら ボタンは表示されていないこと', () => {
+  test('ゲームが終了したら NEXT GAME ボタンが表示されていること', () => {
     const { queryByText } = render(
       <Controller
         answered={false}
@@ -62,6 +65,7 @@ describe('Controller コンポーネントのテスト', () => {
         startGame={() => {}}
         check={() => {}}
         next={() => {}}
+        nextGame={() => {}}
       />
     )
 
@@ -76,5 +80,8 @@ describe('Controller コンポーネントのテスト', () => {
 
     const nextButton = queryByText('NEXT')
     expect(nextButton).toBeNull()
+
+    const nextGameButton = queryByText('NEXT GAME')
+    expect(nextGameButton).toBeInTheDocument()
   })
 })

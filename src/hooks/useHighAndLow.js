@@ -58,6 +58,8 @@ export const useHighAndLow = () => {
   function next() {
     if (deck.length === 0) {
       setIsGameFinished(true)
+      // カードを引いた状態で次のゲームを始めるための準備
+      setDeck(getDeck)
     } else {
       const newFirstCard = { ...secondCard }
       setFirstCard(newFirstCard)
@@ -84,6 +86,17 @@ export const useHighAndLow = () => {
     return message
   }
 
+  function nextGame() {
+    setFirstCard(getCard)
+    setSecondCard(getMaskCard)
+    setIsWin(null)
+    setAnswered(false)
+    setIsGameStarted(true)
+    setIsGameFinished(false)
+    setWinCount(0)
+    setLoseCount(0)
+  }
+
   return [
     {
       deck,
@@ -101,7 +114,8 @@ export const useHighAndLow = () => {
       check,
       next,
       getMessage,
-      getScore
+      getScore,
+      nextGame
     }
   ]
 }

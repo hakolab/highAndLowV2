@@ -28,6 +28,7 @@ export default function HighAndLow() {
           startGame={action.startGame}
           next={action.next}
           check={action.check}
+          nextGame={action.nextGame}
         />
       </PlayArea>
       <ScoreBoard score={action.getScore()} />

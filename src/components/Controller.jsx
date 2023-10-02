@@ -3,6 +3,7 @@ import NextButton from './NextButton'
 import HighAndLowButtons from './HighAndLowButtons'
 import Check from '../constants/check'
 import StartButton from './StartButton'
+import NextGameButton from "./NextGameButton";
 
 export default function Controller({
   answered,
@@ -10,14 +11,15 @@ export default function Controller({
   isGameFinished,
   startGame,
   next,
-  check
+  check,
+  nextGame
 }) {
   function getButtons() {
     if (!isGameStarted) {
       return <StartButton onClickStart={startGame} />
     }
     if (isGameFinished) {
-      return null
+      return <NextGameButton onClickNextGame={nextGame} />
     }
     return answered ? (
       <NextButton onClickNext={next} />
@@ -38,5 +40,6 @@ Controller.propTypes = {
   isGameFinished: PropTypes.bool.isRequired,
   startGame: PropTypes.func.isRequired,
   next: PropTypes.func.isRequired,
-  check: PropTypes.func.isRequired
+  check: PropTypes.func.isRequired,
+  nextGame: PropTypes.func.isRequired
 }

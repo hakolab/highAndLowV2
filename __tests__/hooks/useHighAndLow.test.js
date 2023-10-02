@@ -197,7 +197,7 @@ describe('useHighAndLowe をテストします。', () => {
     })
 
     // デッキが0枚になるまで繰り返す。
-    while (result.current[0].deck.length > 0) {
+    while (!result.current[0].isGameFinished) {
       act(() => {
         // 1: HIGH
         result.current[1].check(1)
@@ -216,5 +216,54 @@ describe('useHighAndLowe をテストします。', () => {
     const scoreTextRegExp =
       /^Win: [0-9]|[1-4][0-9]|5[0-1] Lose: [0-9]|[1-4][0-9]|5[0-1]$/
     expect(scoreTextRegExp.test(result.current[1].getScore())).toBeTruthy()
+
+    expect(result.current[0].deck).toHaveLength(52)
+  })
+
+  test('次ゲーム開始直後のステート確認', () => {
+    const { result } = renderHook(() => useHighAndLow())
+
+    act(() => {
+      result.current[1].startGame()
+    })
+
+    // デッキが0枚になるまで繰り返す。
+    while (!result.current[0].isGameFinished) {
+      act(() => {
+        // 1: HIGH
+        result.current[1].check(1)
+      })
+      act(() => {
+        result.current[1].next()
+      })
+    }
+
+    act(() => {
+      result.current[1].nextGame()
+    })
+
+    // ゲーム開始フラグ
+    expect(result.current[0].isGameStarted).toBeTruthy()
+    // 一枚目のカードはオープンカード
+    // null でなく、想定データのいずれかの値がセットされていること
+    expect(result.current[0].firstCard).not.toBeNull()
+    expect(
+        expectedDeckData.suits.includes(result.current[0].firstCard.suit)
+    ).toBeTruthy()
+    expect(
+        expectedDeckData.ranks.includes(result.current[0].firstCard.rank)
+    ).toBeTruthy()
+
+    // 二枚目のカードはマスクカード
+    // suit, rank ともに '?'
+    expect(result.current[0].secondCard).not.toBeNull()
+    expect(result.current[0].secondCard.suit).toBe('?')
+    expect(result.current[0].secondCard.rank).toBe('?')
+
+    // カードが一枚オープンしたので、デッキが一枚減っている
+    expect(result.current[0].deck).toHaveLength(51)
+
+    // メッセージが正しく出力されること
+    expect(result.current[1].getMessage()).toBe('High or Low?')
   })
 })
